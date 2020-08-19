@@ -1,0 +1,25 @@
+name: Retardify commit message
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-16.04
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Git setup
+      run: |
+        git config user.email ${{ secrets.EMAIL }}
+        git config user.name ${{ secrets.FULL_NAME }}
+    - name: Retardify commit message
+      run: |
+        chmod +x ./asciiArt.py && chmod +x ./retardify.py
+        ./asciiArt.py
+        message=$(git log -1 --pretty=%B)
+        retardifiedMessage=$(./retardify.py "${message}")
+        git commit --amend -m "${retardifiedMessage}"
+    - name: Push the new message
+      run: |
+        branchName=$(git branch | grep '*' | tr -d '* ')
+        git push --force-with-lease origin ${branchName}
