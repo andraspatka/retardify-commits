@@ -6,7 +6,7 @@ Having conventional, easy-to-read and meaningful commit messages is boring. **Ha
 
 Basically it transforms your commit messages to retarded-case. What is retarded-case? It's this:
 
-![Spongebob boii](image.png)
+![](https://github.com/andraspatka/retardify-commits/blob/master/spongebob.jpg)
 
 ## Support for conventional commit messages!
 
