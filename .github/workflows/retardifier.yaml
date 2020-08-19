@@ -18,8 +18,9 @@ jobs:
         ./asciiArt.py
         message=$(git log -1 --pretty=%B)
         retardifiedMessage=$(./retardify.py "${message}")
-        git commit -m "${retardifiedMessage}"
+        git commit --amend -m "${retardifiedMessage}"
     - name: Push the new message
       run: |
         branchName=$(git branch | grep '*' | tr -d '* ')
+        git pull --allow-unrelated-histories
         git push origin ${branchName}
